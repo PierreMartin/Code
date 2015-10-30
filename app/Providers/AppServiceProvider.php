@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Comment;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Pour compter le nombre de commentaires par postes :
+        Comment::created(function($comment) {
+            $comment->post->comments_count++;
+            $comment->post->save();
+        });
     }
 
     /**

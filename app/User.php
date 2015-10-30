@@ -16,6 +16,12 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+
+    // RELATION  Posts <-> user :
+    public function posts() {
+        return $this->hasMany('App\Post');
+    }
+
     /**
      * The database table used by the model.
      *
